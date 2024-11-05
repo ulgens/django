@@ -3148,6 +3148,194 @@ class Dumpdata(AdminScriptTestCase):
         self.assertNoOutput(out)
 
 
+class Listurls(AdminScriptTestCase):
+    """
+    Tests for the listurls command.
+    """
+
+    @override_settings(ROOT_URLCONF="admin_scripts.app_with_urls.root_urls")
+    def test_default(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls"]
+        out, err = self.run_manage(args)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_named")
+        self.assertOutput(out, "ns:named")
+
+        self.assertOutput(out, "/namespaced/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_named")
+
+        self.assertOutput(out, "/nons/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_unnamed")
+
+    @override_settings(ROOT_URLCONF="admin_scripts.app_with_urls.root_urls")
+    def test_aligned(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-f", "aligned"]
+        out, err = self.run_manage(args)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_named")
+        self.assertOutput(out, "ns:named")
+
+        self.assertOutput(out, "/namespaced/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_named")
+
+        self.assertOutput(out, "/nons/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_unnamed")
+
+    @override_settings(ROOT_URLCONF="admin_scripts.app_with_urls.root_urls")
+    def test_table(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-f", "table"]
+        out, err = self.run_manage(args)
+        print(out)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "Route")
+        self.assertOutput(out, "View")
+        self.assertOutput(out, "Name")
+        self.assertOutput(out, "---+---")
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_named")
+        self.assertOutput(out, "ns:named")
+
+        self.assertOutput(out, "/namespaced/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_named")
+
+        self.assertOutput(out, "/nons/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_unnamed")
+
+    @override_settings(ROOT_URLCONF="admin_scripts.app_with_urls.root_urls")
+    def test_verbose(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-f", "verbose"]
+        out, err = self.run_manage(args)
+        print(out)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "ns:named")
+        self.assertOutput(out, "/namespaced/unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "/nons/unnamed")
+
+    def test_json(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-f", "json"]
+        out, err = self.run_manage(args)
+        print(out)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "ns:named")
+        self.assertOutput(out, "/namespaced/unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "/nons/unnamed")
+
+    def test_pretty_json(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-f", "pretty-json"]
+        out, err = self.run_manage(args)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_named")
+        self.assertOutput(out, "ns:named")
+
+        self.assertOutput(out, "/namespaced/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_namespaced_unnamed")
+
+        self.assertOutput(out, "/nons/named")
+        self.assertOutput(out, "app_with_urls:named")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_named")
+
+        self.assertOutput(out, "/nons/unnamed")
+        self.assertOutput(out, "admin_scripts.app_with_urls.views.view_func_nons_unnamed")
+
+    def test_unsorted(self):
+        pass
+
+    def test_no_urls(self):
+        self.write_settings("settings.py")
+
+        args = ["listurls"]
+        out, err = self.run_manage(args)
+
+        self.assertNoOutput(err)
+        self.assertOutput(out, "There are no URL patterns that match given prefixes")
+
+    @override_settings(ROOT_URLCONF="admin_scripts.app_with_urls.root_urls")
+    def test_prefixes(self):
+        self.write_settings(
+            "settings.py",
+            apps=["admin_scripts.app_with_urls"],
+        )
+
+        args = ["listurls", "-p", "/namespaced"]
+        out, err = self.run_manage(args)
+
+        self.assertNoOutput(err)
+
+        self.assertOutput(out, "/namespaced/named")
+        self.assertOutput(out, "ns:named")
+        self.assertOutput(out, "/namespaced/unnamed")
+
+        self.assertNotInOutput(out, "/nons/named")
+        self.assertNotInOutput(out, "app_with_urls:named")
+        self.assertNotInOutput(out, "/nons/unnamed")
+
+
 class MainModule(AdminScriptTestCase):
     """python -m django works like django-admin."""
 
