@@ -1,9 +1,8 @@
 import warnings
 
 from django.contrib.postgres.fields import ArrayField
-from django.db.models import Aggregate, BooleanField, JSONField
+from django.db.models import Aggregate, BooleanField, JSONField, Value
 from django.db.models import StringAgg as _StringAgg
-from django.db.models import Value
 from django.utils.deprecation import RemovedInDjango70Warning
 
 __all__ = [

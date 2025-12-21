@@ -8,4 +8,9 @@ force-exclude = true
 
 [lint]
 preview = true
-select = []
+select = [
+    "I",
+]
+
+[lint.isort]
+combine-as-imports = false

@@ -14,9 +14,14 @@ from django.conf import DEFAULT_STORAGE_ALIAS, STATICFILES_STORAGE_ALIAS
 from django.core.cache import cache
 from django.core.exceptions import SuspiciousFileOperation
 from django.core.files.base import ContentFile, File
-from django.core.files.storage import FileSystemStorage, InvalidStorageError
+from django.core.files.storage import (
+    FileSystemStorage,
+    InvalidStorageError,
+    StorageHandler,
+    default_storage,
+    storages,
+)
 from django.core.files.storage import Storage as BaseStorage
-from django.core.files.storage import StorageHandler, default_storage, storages
 from django.core.files.uploadedfile import (
     InMemoryUploadedFile,
     SimpleUploadedFile,
