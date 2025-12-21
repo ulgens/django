@@ -28,15 +28,13 @@ from django.views.debug import (
     CallableSettingWrapper,
     ExceptionCycleWarning,
     ExceptionReporter,
-)
-from django.views.debug import Path as DebugPath
-from django.views.debug import (
     SafeExceptionReporterFilter,
     default_urlconf,
     get_default_exception_reporter_filter,
     technical_404_response,
     technical_500_response,
 )
+from django.views.debug import Path as DebugPath
 from django.views.decorators.debug import sensitive_post_parameters, sensitive_variables
 
 from ..views import (

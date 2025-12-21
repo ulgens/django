@@ -22,9 +22,6 @@ from .models import AggregateTestModel, HotelReservation, Room, StatTestModel
 
 try:
     from django.contrib.postgres.aggregates import (
-        StringAgg,  # RemovedInDjango70Warning.
-    )
-    from django.contrib.postgres.aggregates import (
         ArrayAgg,
         BitAnd,
         BitOr,
@@ -44,6 +41,7 @@ try:
         RegrSXY,
         RegrSYY,
         StatAggregate,
+        StringAgg,  # RemovedInDjango70Warning.
     )
     from django.contrib.postgres.fields import ArrayField
 except ImportError:
