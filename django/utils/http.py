@@ -4,9 +4,8 @@ import unicodedata
 from binascii import Error as BinasciiError
 from datetime import UTC, datetime
 from email.utils import formatdate
-from urllib.parse import quote, unquote
+from urllib.parse import quote, unquote, urlsplit
 from urllib.parse import urlencode as original_urlencode
-from urllib.parse import urlsplit
 
 from django.utils.datastructures import MultiValueDict
 from django.utils.regex_helper import _lazy_re_compile

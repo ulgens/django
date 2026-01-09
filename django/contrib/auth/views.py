@@ -3,10 +3,13 @@ from urllib.parse import urlsplit, urlunsplit
 from django.conf import settings
 
 # Avoid shadowing the login() and logout() views below.
-from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
+from django.contrib.auth import (
+    REDIRECT_FIELD_NAME,
+    get_user_model,
+    update_session_auth_hash,
+)
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_not_required, login_required
 from django.contrib.auth.forms import (
     AuthenticationForm,

@@ -3,9 +3,8 @@ import enum
 import json
 import re
 from functools import partial, update_wrapper
-from urllib.parse import parse_qsl
+from urllib.parse import parse_qsl, urlsplit
 from urllib.parse import quote as urlquote
-from urllib.parse import urlsplit
 
 from django import forms
 from django.conf import settings

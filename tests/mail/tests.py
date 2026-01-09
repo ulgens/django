@@ -8,9 +8,8 @@ import socket
 import sys
 import tempfile
 from datetime import datetime, timezone
-from email import message_from_binary_file
+from email import message_from_binary_file, policy
 from email import message_from_bytes as _message_from_bytes
-from email import policy
 from email.headerregistry import Address
 from email.message import EmailMessage as PyEmailMessage
 from email.message import Message as PyMessage

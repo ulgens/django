@@ -3,9 +3,8 @@ from collections import namedtuple
 import sqlparse
 
 from django.db import DatabaseError
-from django.db.backends.base.introspection import BaseDatabaseIntrospection
+from django.db.backends.base.introspection import BaseDatabaseIntrospection, TableInfo
 from django.db.backends.base.introspection import FieldInfo as BaseFieldInfo
-from django.db.backends.base.introspection import TableInfo
 from django.db.models import Index
 from django.utils.regex_helper import _lazy_re_compile
 

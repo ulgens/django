@@ -1,7 +1,6 @@
-from template_tests.utils import setup
-
 from django.template import TemplateSyntaxError
 from django.test import SimpleTestCase
+from template_tests.utils import setup
 
 
 class I18nLanguageTagTests(SimpleTestCase):

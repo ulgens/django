@@ -1,8 +1,11 @@
 from django.core.exceptions import FieldError, FullResultSet
 from django.db.models.expressions import Col
-from django.db.models.sql.compiler import SQLAggregateCompiler, SQLCompiler
+from django.db.models.sql.compiler import (
+    SQLAggregateCompiler,
+    SQLCompiler,
+    SQLInsertCompiler,
+)
 from django.db.models.sql.compiler import SQLDeleteCompiler as BaseSQLDeleteCompiler
-from django.db.models.sql.compiler import SQLInsertCompiler
 from django.db.models.sql.compiler import SQLUpdateCompiler as BaseSQLUpdateCompiler
 
 __all__ = [

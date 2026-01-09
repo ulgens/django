@@ -5,8 +5,10 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 # For backwards compatibility with Django < 3.2
-from django.utils.connection import ConnectionDoesNotExist  # NOQA: F401
-from django.utils.connection import BaseConnectionHandler
+from django.utils.connection import (
+    BaseConnectionHandler,
+    ConnectionDoesNotExist,  # NOQA: F401
+)
 from django.utils.functional import cached_property
 from django.utils.module_loading import import_string
 
